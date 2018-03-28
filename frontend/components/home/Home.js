@@ -5,12 +5,7 @@ import axios from 'axios';
 // Import components
 import Loading from '../shared/Loading';
 import ErrorMessage from '../shared/ErrorMessage';
-import Banner from './Banner';
-import NaldaVideo from './NaldaVideo';
-import ListingCategories from './ListingCategories';
-import RecommendedContent from './RecommendedContent';
 import Tags from '../shared/Tags';
-import FromTheEditors from './FromTheEditors';
 
 /**
  * Component for the homepage of the application
@@ -26,7 +21,6 @@ class Home extends React.Component {
     this.state = {
       pending: true,
       error: "",
-      banner: [],
     };
   }
 
@@ -72,7 +66,7 @@ class Home extends React.Component {
    */
   componentDidUpdate() {
     // Update the page title
-    document.title = "Nalda";
+    document.title = "Riplo";
   }
 
   // Function to render the component
@@ -81,14 +75,10 @@ class Home extends React.Component {
     return (
       <div>
         <Tags />
-        <Banner banners={this.state.banner} />
         <div className="container">
           <div className="space-3"/>
           <ErrorMessage error={this.state.error} />
-          <RecommendedContent content={this.state.recommended}/>
-          <FromTheEditors content={this.state.fromTheEditors}/>
-          <NaldaVideo content={this.state.naldaVideos} />
-          <ListingCategories />
+          Hello, welcome home.
         </div>
       </div>
     );

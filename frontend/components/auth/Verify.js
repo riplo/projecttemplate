@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import Thin from '../shared/Thin';
 import Loading from '../shared/Loading';
 import ErrorMessage from '../shared/ErrorMessage';
+import SuccessMessage from '../shared/SuccessMessage';
 
 /**
  * Component rendered to tell user that they've been verified
@@ -60,11 +61,7 @@ class Verify extends Component {
           {
             this.state.pending ? <Loading /> : (
               <div>
-                { this.state.verified ? (
-                  <div className="alert alert-success marg-bot-1">
-                    Your account has been verified!
-                  </div>
-                ) : null }
+                <SuccessMessage message={"Your account has been verified!"} />
                 <ErrorMessage error={this.state.error} />
                 <Link to="/" className="btn btn-primary full-width">
                   Back to home

@@ -7,6 +7,7 @@ import axios from 'axios';
 
 // Import components
 import ErrorMessage from '../shared/ErrorMessage';
+import SuccessMessage from '../shared/SuccessMessage';
 import Thin from '../shared/Thin';
 
 /**
@@ -135,13 +136,7 @@ class ResetPassword extends Component {
 
             { /* Render an error if there is one */}
             <ErrorMessage error={ this.state.error } />
-            {
-              this.state.success ? (
-                <div className="alert alert-success marg-bot-1">
-                  { this.state.success }
-                </div>
-              ) : null
-            }
+            <SuccessMessage message="this.state.success"/>
             <label>
               New password
             </label>
