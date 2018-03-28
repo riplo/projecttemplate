@@ -30,27 +30,3 @@ export function logout() {
     type: 'LOGOUT'
   };
 }
-
-// Dispatch an action to change name
-export function changeFullName(name) {
-  return {
-    type: 'NAMECHANGE',
-    name,
-  };
-}
-
-// Dispatch an action to change profile picture
-export function changeProfilePicture(profilePicture) {
-  return {
-    type: 'PROFILEPICTURECHANGE',
-    profilePicture,
-  };
-}
-
-// Dispatch an action to change location
-export function changeUserLocation(location) {
-  return {
-    type: 'LOCATIONCHANGE',
-    location,
-  };
-}

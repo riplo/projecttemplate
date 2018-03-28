@@ -13,6 +13,7 @@ import {notifyMessage} from '../../actions/notification';
 import Thin from '../shared/Thin';
 import Tags from '../shared/Tags';
 import ErrorMessage from '../shared/ErrorMessage';
+import SuccessMessage from '../shared/SuccessMessage';
 
 /**
  * Component to render the form for a user logging in
@@ -153,7 +154,7 @@ class Login extends Component {
     // If user is logged in or if user successfully logs in, redirects to home
     return (
       <div>
-        <Tags title="Login" description="Login to Nalda" keywords="Nalda,Login,login,penn" />
+        <Tags title="Login" description="Login to Riplo" keywords="Riplo,Login,login,penn" />
         {this.props.userId && <Redirect to="/" />}
         <div className="space-2" />
         <Thin>
@@ -164,13 +165,8 @@ class Login extends Component {
               </h2>
 
               <ErrorMessage error={ this.state.error } />
-              {
-                this.state.success ? (
-                  <div className="alert alert-success marg-bot-1">
-                    { this.state.success }
-                  </div>
-                ) : null
-              }
+              <SuccessMessage message={ this.state.success } />
+
               <input
                 placeholder="Email"
                 type="text"
