@@ -13,6 +13,7 @@ module.exports = () => {
   /**
    * Route to signify that the SSL certificate is working
    */
+   // TODO use new SSL certificate
   router.get('/:content', (req, res) => {
     res.send('sQqntnAKnzqPmtp6DSZzYgrGbSKs_t1ZdF5sJYOhSu4.2p3-v58-YTA3HJDTRTpUfSDYFD0zik-T5uJnVGsz-lE');
   });
