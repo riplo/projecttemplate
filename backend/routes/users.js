@@ -10,10 +10,6 @@ const router = express.Router();
 const AWS = require('aws-sdk');
 const uuid = require('uuid-v4');
 
-// Import database models
-const Article = require('../models/article');
-const Listing = require('../models/listing');
-const Video = require('../models/video');
 const User = require('../models/user');
 
 // Import helper methods
@@ -174,6 +170,7 @@ module.exports = () => {
         });
       } else {
          // TODO error check based on type
+         // TODO profile picture size restrictions
         if (!profilePicture) {
           res.send({
             success: false,
@@ -238,105 +235,6 @@ module.exports = () => {
             }
           });
         }
-      }
-    });
-  });
-
-  /**
-   * Return a given user's username (the user's email)
-   */
-  router.get('/username', (req, res) => {
-    UserCheck(req, (authRes) => {
-      if (!authRes.success) {
-        res.send({
-          success: false,
-          error: authRes,
-        });
-      } else {
-        User.findById(req.session.passport.user, (err, user) => {
-          if (err) {
-            res.send({
-              success: false,
-              error: 'Error finding user.',
-            });
-          } else {
-            res.send({
-              success: true,
-              data: user.username,
-            });
-          }
-        });
-      }
-    });
-  });
-
-  /**
-   * Find a given user's profile information
-   */
-  router.get('/:id', (req, res) => {
-    // Find the id from the url
-    const id = req.params.id;
-
-    // Find user's profile in Mongo
-    User.findById(id, (err, user) => {
-      // Error finding user
-      if (err) {
-        res.send({
-          success: false,
-          error: err.message,
-        });
-      } else if (!user) {
-        // User doesn't exist in mongo
-        res.send({
-          success: false,
-          error: 'User does not exist.'
-        });
-      // Otherwise render user data
-      } else if (user.userType === 'user') {
-        res.send({
-          success: false,
-          error: 'User does not exist.',
-        });
-      } else {
-        Article.find({author: id}, (errArticles, articles) => {
-          // Error checking
-          if (errArticles) {
-            res.send({
-              success: false,
-              error: 'Error finding user.',
-            });
-          } else {
-            Listing.find({author: id}, (errListings, listings) => {
-              if (errListings) {
-                res.send({
-                  success: false,
-                  error: 'Error finding user.',
-                });
-              } else {
-                Video.find({author: id}, (errVideo, videos) => {
-                  if (errVideo) {
-                    res.send({
-                      success: false,
-                      error: 'Error finding user.',
-                    });
-                  } else {
-                    // Remove private data before sending back
-                    // TODO Remove private data better
-                    user.password = "";
-                    res.send({
-                      success: true,
-                      error: '',
-                      data: user,
-                      articles,
-                      listings,
-                      videos,
-                    });
-                  }
-                });
-              }
-            });
-          }
-        });
       }
     });
   });

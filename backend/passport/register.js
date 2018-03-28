@@ -64,7 +64,7 @@ module.exports = () => {
               location: req.body.location,
               password: createHash(req.body.password),
               userType: 'user',
-              profilePicture: 'https://s3.amazonaws.com/nalda/default-profile-picture.png',
+              profilePicture: 'https://www.drupal.org/files/profile_default.png',
             });
 
             sendWelcomeEmail(newUser, (resp) => {
