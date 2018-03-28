@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 /**
  * Component which leverages react hemlet to set meta tags of the page
- * TODO more tags
+ * TODO add riplo image
  */
 const Tags = ({title, description, image, keywords}) => {
   // Crosscheck passed in props with default props
   const tags = {
-    title: title ? `Nalda | ${title}` : "Nalda",
-    description: description ? description : "A centralized source for information, food, activities, and fun on your campus.",
-    keywords: keywords ? keywords : "Nalda,food,campus,map,fun,drinks,study,spots,spaces,restaurants",
+    title: title ? `riplo | ${title}` : "riplo",
+    description: description ? description : "A project template.",
+    keywords: keywords ? keywords : "riplo",
     image: image ? image : "https://s3.amazonaws.com/nalda/nalda-overview.png",
   };
 

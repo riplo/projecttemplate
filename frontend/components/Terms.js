@@ -14,12 +14,12 @@ const Terms = () => {
   // Return the terms
   return (
     <div className="container">
-      <Tags title="Terms of Use" description="Nalda's terms of use." keywords="nalda,terms,use" />
+      <Tags title="Terms of Use" description="Riplo's terms of use." keywords="riplo,terms,use" />
       <h4 className="dark-gray-text title marg-top-1 marg-bot-1">
         Terms of use
       </h4>
       <p>
-        Nalda reserves all rights to its application and user data.
+        Riplo reserves all rights to its application and user data.
       </p>
     </div>
   );

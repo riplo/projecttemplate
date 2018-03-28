@@ -20,24 +20,24 @@ class About extends Component {
     return (
       <Thin>
         <div>
-          <Tags title="About" description="Learn more about Nalda." />
+          <Tags title="About" description="Learn more about Riplo." />
           <h3 className="primary-text marg-top-1 marg-bot-1">
-            Hey there, we're Nalda
+            Hey there, we're Riplo
           </h3>
           <p className="dark-gray-text">
-            College is an experience – academic rigors, friendships, and countless new adventures. It is also, however, a home and a way of life.
+            hello world
           </p>
           <p className="dark-gray-text">
-            Nalda aims to help college students explore the neighborhoods of their schools by providing specially curated student-to-student information about how to make the most of their college experience. Brunch spots, food trucks, birthday venues, Nalda has it all.
+            hello world
           </p>
           <p className="dark-gray-text">
-            But more importantly, Nalda only gives you what you need. It’s like an experienced friend giving you suggestions, except now, you could have that friend with you anywhere, at any time.
+            hello world
           </p>
           <p className="dark-gray-text">
-            Thank you for giving us your time, and look forward to more content soon.
+            hello world
           </p>
           <p className="dark-gray-text italic marg-bot-2">
-            - The Nalda team
+            - The Riplo team
           </p>
         </div>
       </Thin>

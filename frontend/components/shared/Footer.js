@@ -7,21 +7,22 @@ import { Link } from 'react-router-dom';
  */
 class Footer extends React.Component {
   // Render the component
+  // TODO riplo image
   render() {
     return (
       <footer>
         <div className="container-fluid">
           <div className="footer-top">
             <div className="logo">
-              <img src="https://s3.amazonaws.com/nalda/nalda_logo.svg" alt="Nalda" />
-              Nalda
+              <img src="https://s3.amazonaws.com/nalda/nalda_logo.svg" alt="Riplo" />
+              Riplo
             </div>
             <div className="credits">
-              &copy; 2018 Nalda. All rights reserved.
+              &copy; 2018 Riplo. All rights reserved.
             </div>
             <div className="links">
               <Link to="/about">
-                About Nalda
+                About Riplo
               </Link>
               <Link to="/contact">
                 Contact us

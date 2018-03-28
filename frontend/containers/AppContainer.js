@@ -26,23 +26,6 @@ import Verify from '../components/auth/Verify';
 
 // Content viewing components
 import Home from '../components/home/Home';
-import Article from '../components/content/articles/Article';
-import Articles from '../components/content/articles/Articles';
-import Listing from '../components/content/listings/Listing';
-import Listings from '../components/content/listings/Listings';
-import Video from '../components/content/videos/Video';
-import Videos from '../components/content/videos/Videos';
-import Categories from '../components/content/listings/Categories';
-
-// Content creation components
-import ArticleForm from '../components/content/forms/ArticleForm';
-import ListingForm from '../components/content/forms/ListingForm';
-import VideoForm from '../components/content/forms/VideoForm';
-
-// Content editing components
-import EditArticleForm from '../components/content/forms/EditArticleForm';
-import EditListingForm from '../components/content/forms/EditListingForm';
-import EditVideoForm from '../components/content/forms/EditVideoForm';
 
 // Other components
 import About from '../components/About';
@@ -50,9 +33,7 @@ import Contact from '../components/Contact';
 import Credits from '../components/Credits';
 import Terms from '../components/Terms';
 import Privacy from '../components/Privacy';
-import Admin from '../components/admin/Admin';
 import NotFoundSection from '../components/NotFoundSection';
-import Profile from '../components/Profile';
 
 /**
  * Component to handle routing on the frontend
@@ -94,7 +75,6 @@ class AppContainer extends Component {
       if (!resp.data.success) {
         // Dispatch the logout action
         onLogout();
-
         // Set the state to redirect to login
         this.setState({
           redirectToLogin: true,
@@ -102,7 +82,6 @@ class AppContainer extends Component {
       } else {
         // Get the user from the response
         const user = resp.data.user;
-
         // If user is logged in through facebook on backend, update on Frontend
         if (resp.data.oAuthLogin) {
           // Send redux event
@@ -134,9 +113,6 @@ class AppContainer extends Component {
                 <Route exact path="/reset/:token" component={ResetPassword} />
                 <Route exact path="/verify/:token" component={requireLogin(Verify)} />
 
-                { /* Routes for viewing profiles */ }
-                <Route exact path="/users/:id" component={Profile} />
-
                 { /* General routes */ }
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/contact" component={Contact}/>
@@ -145,27 +121,6 @@ class AppContainer extends Component {
                 <Route exact path="/credits" component={Credits}/>
                 <Route exact path="/" component={Home}/>
 
-                { /* Admin routes */ }
-                <Route exact path="/admin" component={requireAdmin(Admin)}/>
-
-                { /* Routes for articles */ }
-                <Route exact path="/articles" component={Articles} />
-                <Route exact path="/articles/new" component={requireCurator(ArticleForm)} />
-                <Route exact path="/articles/:id" component={Article} />
-                <Route exact path="/articles/:id/edit" component={requireCurator(EditArticleForm)} />
-
-                { /* Routes for listings */ }
-                <Route exact path="/listings" component={Listings} />
-                <Route exact path="/listings/new" component={requireCurator(ListingForm)} />
-                <Route exact path="/listings/:id" component={Listing} />
-                <Route exact path="/listings/:id/edit" component={requireCurator(EditListingForm)} />
-                <Route exact path="/listings/categories/:categoryName" component={Categories} />
-
-                { /* Routes for videos */ }
-                <Route exact path="/videos" component={Videos} />
-                <Route exact path="/videos/new" component={requireCurator(VideoForm)} />
-                <Route exact path="/videos/:id" component={Video} />
-                <Route exact path="/videos/:id/edit" component={requireCurator(EditVideoForm)} />
 
                 { /* 404 if no other route was matched */ }
                 <Route exact path="/*" component={NotFoundSection}/>

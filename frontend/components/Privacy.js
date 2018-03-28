@@ -14,12 +14,12 @@ const Privacy = () => {
   // Return the privacy policy
   return (
     <div className="container">
-      <Tags title="Privacy" description="Nalda's privacy policy." keywords="nalda,privacy,policy" />
+      <Tags title="Privacy" description="Nalda's privacy policy." keywords="riplo,privacy,policy" />
       <h4 className="dark-gray-text title marg-top-1 marg-bot-1">
         Privacy policy
       </h4>
       <p>
-        Nalda reserves all rights to its application and user data.
+        Riplo reserves all rights to its application and user data.
       </p>
     </div>
   );

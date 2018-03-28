@@ -13,12 +13,13 @@ import Thin from './shared/Thin';
  * and can provide a link back to "/listings" instead of to the homepage.
  */
 class NotFoundSection extends Component {
+  // TODO Put Riplo icon instead of Nalda
   render() {
     return (
       <Thin>
         <div className="card pad-1 marg-top-1">
           <div className="not-found-compass">
-            <img src="https://s3.amazonaws.com/nalda/logo_gray.svg" alt="Nalda" />
+            <img src="https://s3.amazonaws.com/nalda/logo_gray.svg" alt="Riplo" />
           </div>
           <h2 className="bold marg-bot-1 dark-gray-text">
             {
