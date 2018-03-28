@@ -204,7 +204,7 @@ class Sidebar extends Component {
               )
             }
             <div className="sidebar-logo">
-              <img src="https://s3.amazonaws.com/nalda/logo_gray.svg" alt="Nalda" />
+              <img src="https://s3.amazonaws.com/nalda/logo_gray.svg" alt="riplo" />
             </div>
           </div>
         </div>

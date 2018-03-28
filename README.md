@@ -21,6 +21,7 @@ To run the application, run `npm start`. For more responsive hot-reloading on th
 - [ ] Redo AWS with better style
 - [ ] Change curator and admin names to be admins and gods `RequireAdmin.js`, `RequireLogin.js`, `RequireCurator.js`, `authChecking.js`
 - [ ] Make generic account page `Acccount.js`
+- [ ] Make generic admin page
 - [ ] Make `InfoMessage.js` generic shared component
 - [ ] Uninstall unused packages
 - [ ] Update read me with instructions on setting up mongo, fb oauth, google oauth, sendgrid, AWS, etc.
@@ -31,3 +32,5 @@ To run the application, run `npm start`. For more responsive hot-reloading on th
 - [ ] Image upload stuff in its own component
 - [ ] Size restrictions and type checking on images
 - [ ] Change `contact.js` to be `email.js` and include all instances of sending email, get rid of `sendEmail.js` most likely.
+- [ ] Clean up excess CSS
+- [ ] Delete user account functionality

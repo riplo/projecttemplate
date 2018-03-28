@@ -21,7 +21,7 @@ const sendWelcomeEmail = (user, cb) => {
       return;
     }
     const token = buf.toString('hex');
-    // If registration is successful, send an email welcoming to Nalda.
+    // If registration is successful, send an email welcoming to Riplo.
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     // Email addresses them by first name
     const displayName = user.name.split(' ').length > 1 ? user.name.split(' ')[0] : user.name;
@@ -38,7 +38,7 @@ const sendWelcomeEmail = (user, cb) => {
     const msg = {
       to: user.username,
       from: process.env.SENDGRID_EMAIL,
-      subject: 'Welcome to Nalda, ' + displayName + '! Verify your account.',
+      subject: 'Welcome to Riplo, ' + displayName + '! Verify your account.',
       text: 'Hi ' + displayName + ',\n Welcome to Riplo! Please verify your account at the following link:\n\n' +
       HOST_URL + '/verify/' + token + '\n\n',
       html: html,

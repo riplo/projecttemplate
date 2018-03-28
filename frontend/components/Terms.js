@@ -5,7 +5,7 @@ import React from 'react';
 import Tags from './shared/Tags';
 
 /**
- * Component to render Nalda's terms of use
+ * Component to render Riplo's terms of use
  */
 const Terms = () => {
   // Set the title

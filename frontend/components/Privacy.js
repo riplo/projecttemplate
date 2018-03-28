@@ -5,7 +5,7 @@ import React from 'react';
 import Tags from './shared/Tags';
 
 /**
- * Component to render Nalda's privacy policy
+ * Component to render Riplo's privacy policy
  */
 const Privacy = () => {
   // Update the title
@@ -14,7 +14,7 @@ const Privacy = () => {
   // Return the privacy policy
   return (
     <div className="container">
-      <Tags title="Privacy" description="Nalda's privacy policy." keywords="riplo,privacy,policy" />
+      <Tags title="Privacy" description="Riplo's privacy policy." keywords="riplo,privacy,policy" />
       <h4 className="dark-gray-text title marg-top-1 marg-bot-1">
         Privacy policy
       </h4>

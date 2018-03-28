@@ -336,7 +336,7 @@ class Account extends Component {
           </span>
         </div>
         <div className="gray marg-bot-1">
-          A user can either be an admin, curator, or general user. Only Nalda administrators can change your account type.
+          A user can either be an admin, curator, or general user. Only Riplo administrators can change your account type.
         </div>
 
         <label className="bold">
@@ -392,7 +392,7 @@ class Account extends Component {
     // If user is logged in or if user successfully logs in, redirects to home
     return (
       <div>
-        <Tags title="Account" description="Edit and view your account information." keywords="edit,account,nalda,information,profile,email,security" />
+        <Tags title="Account" description="Edit and view your account information." keywords="edit,account,riplo,information,profile,email,security" />
 
         <div className="container">
           <div className="row">

@@ -5,10 +5,7 @@
 @import './strapper';
 @import './nav';
 @import './footer';
-@import './article';
-@import './listing';
 @import './profile';
-@import './video';
 @import './home';
 @import './form';
 @import './notification';
@@ -541,60 +538,6 @@ a {
     flex: 1;
     width: auto;
     margin-left: 1rem;
-  }
-}
-
-// Styling preview for all forms of content (videos, articles, and listings)
-.content-preview {
-  color: black;
-  margin-bottom: 1rem;
-
-  .background-image {
-    border-radius: 0.4rem;
-    margin-bottom: 0.5rem;
-    height: 10rem;
-    width: 100%;
-
-    .image-wrapper {
-      height: 10rem;
-      padding: 3rem 0rem;
-      display: block;
-
-      img {
-        margin: 0 auto;
-        height: 4rem;
-        width: auto;
-        display: block;
-        opacity: 0.6;
-        transition: all 0.2s ease;
-      }
-    }
-
-    &:hover {
-      .image-wrapper img {
-        opacity: 0.8;
-      }
-    }
-  }
-
-  .location {
-    text-transform: uppercase;
-    margin-bottom: 0.2rem;
-    font-size: 0.8rem;
-    color: $gray;
-    font-weight: bold;
-  }
-
-  .title {
-    font-weight: bold;
-    margin-bottom: 0.25rem !important;
-    font-size: 1.6rem;
-  }
-
-  .subtitle {
-    margin-bottom: 0;
-    font-size: 1.2rem;
-    color: $dark-gray;
   }
 }
 

@@ -9,9 +9,6 @@ const express = require('express');
 const router = express.Router();
 
 // Import database models
-const Article = require('./models/article');
-const Listing = require('./models/listing');
-const Video = require('./models/video');
 const User = require('./models/user');
 
 // Import helper methods
@@ -81,83 +78,6 @@ module.exports = () => {
         }
       });
     }
-  });
-
-  /**
-   * Pull listings, videos, articles, and curators from the database based off what is searched for
-   * @param search (what term user searched for)
-   */
-  router.post('/search', (req, res) => {
-    // First search through articles
-    Article.find({"$text": { $search: req.body.search }}, (errArticle, articles) => {
-      // Error finding articles
-      if (errArticle) {
-        res.send({
-          success: false,
-          error: 'Search error.'
-        });
-      } else {
-        // Now search through listings
-        // TODO: Don't allow search through reviewers
-        Listing.find({"$text": { $search: req.body.search }}, (errListing, listings) => {
-          // Error finding listings
-          if (errListing) {
-            res.send({
-              success: false,
-              error: 'Search error.',
-            });
-          } else {
-            // Now search through videos
-            Video.find({"$text": { $search: req.body.search }}, (errVideo, videos) => {
-              // Error finding videos
-              if (errVideo) {
-                res.send({
-                  success: false,
-                  error: 'Search error.',
-                });
-              } else {
-                // Now search through users
-                User.find({"$text": { $search: req.body.search }}, (errUser, users) => {
-                  // Error finding users
-                  if (errUser) {
-                    res.send({
-                      success: false,
-                      error: 'Search error.',
-                    });
-                  } else {
-                    // Make sure that users are curators or admins, do not want to be able to search for regular users
-                    const curators = [];
-                    // Check each user to make sure they are admin or curator before returning
-                    users.forEach((user) => {
-                      if (user.userType !== 'user') {
-                        curators.push(user);
-                      }
-                    });
-                    // Do not return private information about curators (password, username, etc)
-                    curators.forEach((curator) => {
-                      curator.password = '';
-                      curator.userType = '';
-                      curator.username = '';
-                    });
-                    // If there were no errors, send back all data
-                    res.send({
-                      success: true,
-                      error: '',
-                      data: {
-                        articles,
-                        listings,
-                        videos,
-                        curators,
-                      },
-                    });
-                  }
-                });
-              }
-            });
-          }
-        });
-      }
-    });
   });
 
   /**
