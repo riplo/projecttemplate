@@ -61,10 +61,8 @@ module.exports = () => {
             const newUser = new User({
               name: req.body.name,
               username: req.body.username,
-              location: req.body.location,
               password: createHash(req.body.password),
               userType: 'user',
-              profilePicture: 'https://www.drupal.org/files/profile_default.png',
             });
 
             sendWelcomeEmail(newUser, (resp) => {

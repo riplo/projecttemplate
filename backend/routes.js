@@ -56,10 +56,8 @@ module.exports = () => {
           if (user.facebookId || user.googleId) {
             const userToLogIn = {
               name: user.name,
-              profilePicture: user.profilePicture,
               userType: user.userType,
               userId: user._id,
-              location: user.location.name,
             };
             res.send({
               success: true,
