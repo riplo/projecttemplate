@@ -93,8 +93,6 @@ class Login extends Component {
               resp.data.user._id,
               resp.data.user.userType,
               resp.data.user.name,
-              resp.data.user.location ? resp.data.user.location.name : null,
-              resp.data.user.profilePicture,
             );
           }
         })
@@ -252,7 +250,7 @@ const mapStateToProps = state => {
 // Allows us to dispatch a login event by calling this.props.onLogin
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (userId, userType, name, location, profilePicture) => dispatch(login(userId, userType, name, location, profilePicture)),
+    onLogin: (userId, userType, name) => dispatch(login(userId, userType, name)),
     notifyMessage: (message) => dispatch(notifyMessage(message)),
   };
 };

@@ -7,7 +7,6 @@
 // Import frameworks
 const express = require('express');
 const router = express.Router();
-const uuid = require('uuid-v4');
 
 const User = require('../models/user');
 

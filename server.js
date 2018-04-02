@@ -52,9 +52,6 @@ const {
   GOOGLE_APP_CALLBACK,
   SENDGRID_API_KEY,
   SENDGRID_EMAIL,
-  AWS_BUCKET_NAME,
-  AWS_USER_KEY,
-  AWS_USER_SECRET,
   HOST_URL,
 } = process.env;
 
@@ -68,9 +65,6 @@ else if (!GOOGLE_APP_SECRET) envError = "GOOGLE_APP_SECRET";
 else if (!GOOGLE_APP_CALLBACK) envError = "GOOGLE_APP_CALLBACK";
 else if (!SENDGRID_API_KEY) envError = "SENDGRID_API_KEY";
 else if (!SENDGRID_EMAIL) envError = "SENDGRID_EMAIL";
-else if (!AWS_BUCKET_NAME) envError = "AWS_BUCKET_NAME";
-else if (!AWS_USER_KEY) envError = "AWS_USER_KEY";
-else if (!AWS_USER_SECRET) envError = "AWS_USER_SECRET";
 else if (!HOST_URL) envError = "HOST_URL";
 if (envError) {
   console.error(`ERROR: ${envError} environment variable not found`);
@@ -175,7 +169,6 @@ passport.use(
             username: profile._json.email,
             userType: 'user',
             facebookId: profile.id,
-            profilePicture: `https://graph.facebook.com/${profile.id}/picture?type=large`,
           });
           // Send new user a welcome email
           sendWelcomeEmail(newUser, (resp) => {
@@ -232,7 +225,6 @@ passport.use(new GoogleStrategy({
           username: profile.emails[0].value,
           userType: 'user',
           googleId: profile.id,
-          profilePicture: profile.photos[0].value,
         });
 
         // Send new user a welcome email

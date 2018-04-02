@@ -71,23 +71,12 @@ class Nav extends Component {
           this.props.userId ? (
             <div className="user-info">
               <div className="user-text">
-                { /* Render the user's location information */ }
-                <div className="location">
-                  {
-                    this.props.location && this.props.location.indexOf(",") > 0 ? (
-                      this.props.location.substring(0, this.props.location.lastIndexOf(","))
-                    ) : (
-                      this.props.location || ""
-                    )
-                  }
-                </div>
                 <div className="name">
                   <p>
                     Hi, <Link to="/account">{this.props.name.split(' ').length ? this.props.name.split(' ')[0] : this.props.name }</Link>
                   </p>
                 </div>
               </div>
-              <div className="user-img" style={{ backgroundImage: `url(${this.props.profilePicture})` }}/>
             </div>
           ) : (
             <div className="user-info">
@@ -127,17 +116,13 @@ class Nav extends Component {
 
 Nav.propTypes = {
   userId: PropTypes.string,
-  profilePicture: PropTypes.string,
   name: PropTypes.string,
-  location: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
     userId: state.authState.userId,
-    profilePicture: state.authState.profilePicture,
     name: state.authState.name,
-    location: state.authState.location,
   };
 };
 

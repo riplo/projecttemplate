@@ -85,7 +85,7 @@ class AppContainer extends Component {
         // If user is logged in through facebook on backend, update on Frontend
         if (resp.data.oAuthLogin) {
           // Send redux event
-          onLogin(user.userId, user.userType, user.name, user.location || null, user.profilePicture);
+          onLogin(user.userId, user.userType, user.name);
         }
       }
     })
@@ -155,7 +155,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogout: () => dispatch(logout()),
-    onLogin: (userId, userType, name, location, profilePicture) => dispatch(login(userId, userType, name, location, profilePicture)),
+    onLogin: (userId, userType, name) => dispatch(login(userId, userType, name)),
   };
 };
 

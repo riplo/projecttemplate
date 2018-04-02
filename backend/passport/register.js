@@ -30,11 +30,6 @@ module.exports = () => {
         success: false,
         error: 'Enter full name.',
       });
-    } else if (Object.keys(req.body.location).length === 0) {
-      res.send({
-        success: false,
-        error: 'Location field must be populated.',
-      });
     } else {
       // Ensure password meets validity conditions
       if (invalidPassword(req.body.password, req.body.verPassword)) {

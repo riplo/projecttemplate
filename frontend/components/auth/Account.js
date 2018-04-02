@@ -9,8 +9,6 @@ import Dropzone from 'react-dropzone';
 
 // Import actions
 import {changeFullName} from '../../actions/index.js';
-import {changeProfilePicture} from '../../actions/index.js';
-import {changeUserLocation} from '../../actions/index.js';
 
 // Import components
 import ErrorMessage from '../shared/ErrorMessage';
@@ -34,9 +32,6 @@ class Account extends Component {
       prevName: '',
       email: '',
       type: '',
-      bio: '',
-      profilePicture: '',
-      profilePictureChanged: false,
       accountVerified: false,
       error: '',
       success: '',
@@ -44,7 +39,6 @@ class Account extends Component {
       loading: true,
       pending: false,
       hasChanged: false,
-      location: {},
     };
 
     // Bind this to helper methods
@@ -74,19 +68,11 @@ class Account extends Component {
           name: resp.data.data.name,
           email: resp.data.data.username,
           type: resp.data.data.userType,
-          bio: resp.data.data.bio || '',
-          profilePicture: resp.data.data.profilePicture,
           accountVerified: resp.data.data.accountVerified,
-          location: resp.data.data.location || {},
           error: "",
           pending: false,
           loading: false,
         });
-
-        // Set the location
-        if (resp.data.data.location && resp.data.data.location.name) {
-          document.getElementById('location').value = resp.data.data.location.name;
-        }
       } else {
         this.setState({
           error: resp.data.error,
@@ -108,17 +94,6 @@ class Account extends Component {
    * When the component updates
    */
   componentDidUpdate() {
-    // Isolate location and add google maps autocomplete on it
-    const location = document.getElementById('location');
-    if (location) {
-      // Autocomplete the user's city
-      const options = {
-        types: ['(cities)'],
-        componentRestrictions: {country: 'us'},
-      };
-      new google.maps.places.Autocomplete(location, options);
-    }
-
     // Autosize textareas (for example, the bio textarea)
     autosize(document.querySelectorAll('textarea'));
   }
@@ -159,36 +134,6 @@ class Account extends Component {
     });
   }
 
-  // Helper method that is fired when a profile picture is added
-  onDrop(acceptedFiles, rejectedFiles) {
-    if (acceptedFiles && acceptedFiles.length) {
-      // Read only the first file passed in
-      const profilePicture = acceptedFiles[0];
-
-      const reader = new FileReader();
-
-      // Convert from blob to a proper file object that can be passed to server
-      reader.onload = (upload) => {
-        this.setState({
-          profilePicture: upload.target.result,
-          error: '',
-          profilePictureName: profilePicture.name,
-          profilePictureChanged: true,
-          hasChanged: true,
-        });
-      };
-
-      // File reader set up
-      reader.onabort = () => this.setState({error: "File read aborted."});
-      reader.onerror = () => this.setState({error: "File read error."});
-      reader.readAsDataURL(profilePicture);
-    } else {
-      this.setState({
-        error: rejectedFiles[0].name + ' is not an image.',
-      });
-    }
-  }
-
   /**
    * Handle a change to the bio state
    */
@@ -217,65 +162,30 @@ class Account extends Component {
     if (error) {
       this.setState({ error, pending: false, });
     } else {
-      // Check if the entered location is unique from the previous one
-      const location = document.getElementById('location').value;
-
-      // Find the longitude and latitude of the location passed in
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ 'address': location }, (results, status) => {
-        if (status === google.maps.GeocoderStatus.OK) {
-          const latitude = results[0].geometry.location.lat();
-          const longitude = results[0].geometry.location.lng();
-
-          // Save the updated location
-          const newLocation = {
-            name: location,
-            lat: latitude,
-            lng: longitude,
-          };
-
-          // Send the request to update the user
-          // TODO make sure this works
-          axios.post("/api/users/edit", {
-            location: newLocation,
-            name: this.state.name,
-            bio: this.state.bio,
-            profilePicture: this.state.profilePicture,
-            profilePictureChanged: this.state.profilePictureChanged,
-          })
-            .then(res => {
-              if (!res.data.success) {
-                this.setState({
-                  pending: false,
-                  error: res.data.error,
-                });
-              } else {
-                this.props.changeName(this.state.name);
-                this.props.changeLocation(newLocation.name);
-                if (res.data.data) {
-                  this.props.changeProfilePic(res.data.data);
-                }
-
-                this.setState({
-                  pending: false,
-                  success: "Successfully updated account information.",
-                  profilePictureChanged: false,
-                });
-              }
-            })
-            .catch(err => {
-              this.setState({
-                pending: false,
-                error: err,
-              });
+      // Send the request to update the user
+      axios.post("/api/users/edit", {
+        name: this.state.name,
+      })
+        .then(res => {
+          if (!res.data.success) {
+            this.setState({
+              pending: false,
+              error: res.data.error,
             });
-        } else {
+          } else {
+            this.props.changeName(this.state.name);
+            this.setState({
+              pending: false,
+              success: "Successfully updated account information.",
+            });
+          }
+        })
+        .catch(err => {
           this.setState({
-            error: "There was an error with the Google Maps API. Check the form and try again.",
             pending: false,
+            error: err,
           });
-        }
-      });
+        });
     }
   }
 
@@ -298,28 +208,6 @@ class Account extends Component {
         />
 
         <label className="bold">
-           Profile Picture
-        </label>
-
-        <div
-          className="profile-picture background-image marg-bot-1"
-          style={{backgroundImage: `url(${this.state.profilePicture ? this.state.profilePicture : this.props.profilePicture})`}}
-        />
-
-        <Dropzone onDrop={this.onDrop} accept="image/*" style={{ marginBottom: "1rem" }}>
-          <p className="dropzone">
-            <i className="fa fa-file-o" aria-hidden="true" />
-            {
-              this.state.profilePictureName ? (
-                this.state.profilePictureName
-              ) : (
-                "Drop a file here, or click to select a file to upload."
-              )
-            }
-          </p>
-        </Dropzone>
-
-        <label className="bold">
           Email
         </label>
         <br />
@@ -336,30 +224,8 @@ class Account extends Component {
           </span>
         </div>
         <div className="gray marg-bot-1">
-          A user can either be an admin, curator, or general user. Only Riplo administrators can change your account type.
+          A user can either be a general user or an admin. Only Riplo administrators can change your account type.
         </div>
-
-        <label className="bold">
-          Bio
-        </label>
-        <textarea
-          className="form-control border marg-bot-1"
-          id="bio"
-          ref={(input) => { this.bioInput = input; }}
-          value={ this.state.bio }
-          placeholder="Enter a bio"
-          onChange={ this.handleChangeBio }
-        />
-
-        <label>
-          Location
-        </label>
-        <input
-          className="form-control border marg-bot-1"
-          id="location"
-          type="text"
-          ref={(input) => { this.locationInput = input; }}
-        />
 
         <label>
           Password
@@ -426,18 +292,12 @@ class Account extends Component {
 Account.propTypes = {
   userId: PropTypes.string,
   changeName: PropTypes.func,
-  changeProfilePic: PropTypes.func,
-  profilePicture: PropTypes.string,
-  location: PropTypes.string,
-  changeLocation: PropTypes.func,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = ({authState}) => {
   return {
     userId: authState.userId,
-    profilePicture: authState.profilePicture,
-    location: authState.location,
   };
 };
 
@@ -446,8 +306,6 @@ const mapStateToProps = ({authState}) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeName: (name) => dispatch(changeFullName(name)),
-    changeProfilePic: (profilePicture) => dispatch(changeProfilePicture(profilePicture)),
-    changeLocation: (location) => dispatch(changeUserLocation(location))
   };
 };
 

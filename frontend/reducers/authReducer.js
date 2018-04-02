@@ -4,14 +4,12 @@
 const authReducer = (state = {}, action) => {
   switch (action.type) {
     // When login event is called, will update redux state with userId,
-    // userType, location, and name so we know who is logged in
+    // userType, and name so we know who is logged in
     case 'LOGIN': {
       const newState = Object.assign({}, state);
       newState.userId = action.userId;
       newState.userType = action.userType;
       newState.name = action.name;
-      newState.location = action.location;
-      newState.profilePicture = action.profilePicture;
       return newState;
     }
     // When logout event is called, will remove user from redux state
@@ -20,37 +18,21 @@ const authReducer = (state = {}, action) => {
       newState.userId = null;
       newState.userType = null;
       newState.name = null;
-      newState.location = null;
-      newState.profilePicture = null;
       return newState;
     }
     // When register event is called, will update redux state with userId,
-    // userType, location, and name so we know who is logged in
+    // userType and name so we know who is logged in
     case 'REGISTER': {
       const newState = Object.assign({}, state);
       newState.userId = action.userId;
       newState.userType = action.userType;
       newState.name = action.name;
-      newState.location = action.location;
-      newState.profilePicture = action.profilePicture;
       return newState;
     }
     // When a user changes his/her name
     case 'NAMECHANGE': {
       const newState = Object.assign({}, state);
       newState.name = action.name;
-      return newState;
-    }
-    // When a user changes his/her profile picture
-    case 'PROFILEPICTURECHANGE': {
-      const newState = Object.assign({}, state);
-      newState.profilePicture = action.profilePicture;
-      return newState;
-    }
-    // When a user changes his/her location
-    case 'LOCATIONCHANGE': {
-      const newState = Object.assign({}, state);
-      newState.location = action.location;
       return newState;
     }
     default:

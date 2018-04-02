@@ -14,13 +14,13 @@ __Stack used:__
 
 To run the application, run `npm start`. For more responsive hot-reloading on the backend and frontend, run `npm run frontend` and `npm run backend` concurrently.
 
-Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`, `FACEBOOK_APP_CALLBACK`, `GOOGLE_APP_ID`, `GOOGLE_APP_SECRET`, `GOOGLE_APP_CALLBACK`, `SENDGRID_API_KEY`,`SENDGRID_EMAIL`,`AWS_BUCKET_NAME`, and `HOST_URL`
+Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`, `FACEBOOK_APP_CALLBACK`, `GOOGLE_APP_ID`, `GOOGLE_APP_SECRET`, `GOOGLE_APP_CALLBACK`, `SENDGRID_API_KEY`,`SENDGRID_EMAIL`, and `HOST_URL`
 
 # TODO
 - [ ] Replace all nalda images with riplo images
 - [ ] Convert to simple nav bar (no sidebar)
 - [ ] Change all components to have only one handleChange, get rid of individual handle change xxx methods
-- [ ] Redo AWS with better style
+- [X] Redo AWS with better style
 - [ ] Change curator and admin names to be only users and admins:`RequireAdmin.js`, `RequireLogin.js`, `RequireCurator.js`, `authChecking.js`
 - [ ] Make generic account page `Account.js`
 - [ ] Make generic admin page
@@ -30,12 +30,12 @@ Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_AP
 - [ ] `forgot.js`, `verify.js`, `register.js` email sent should be in helperMethods
 - [ ] move all AWS stuff to helperMethods
 - [ ] fix fb array passing issue in `init.js`
-- [ ] Get rid of location
+- [X] Get rid of location
 - [ ] Image upload stuff in its own component
 - [ ] Size restrictions and type checking on images
 - [ ] Change `contact.js` to be `email.js` and include all instances of sending email, get rid of `sendEmail.js` most likely.
 - [ ] Clean up excess CSS
 - [ ] Delete user account functionality
-- [ ] Get rid of AWS stuff
-- [ ] Get rid of location
+- [X] Get rid of AWS stuff
+- [X] Get rid of location
 - [ ] Split up first and last name
