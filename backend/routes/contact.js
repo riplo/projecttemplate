@@ -19,10 +19,15 @@ module.exports = () => {
         success: false,
         error: 'Email field must be populated.',
       });
-    } else if (!req.body.name) {
+    } else if (!req.body.first) {
       res.send({
         success: false,
-        error: 'Name field must be populated.',
+        error: 'First name field must be populated.',
+      });
+    } else if (!req.body.last) {
+      res.send({
+        success: false,
+        error: 'Last name field must be populated.',
       });
     } else if (!req.body.message) {
       res.send({

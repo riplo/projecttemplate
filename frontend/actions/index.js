@@ -1,22 +1,22 @@
 // Actions which will be dispatched to the reducers (authReducer.js)
 
 // Dispatch login action, will call appropriate reducer (authReducer.js)
-export function login(userId, userType, name) {
+export function login(userId, userType, first) {
   return {
     type: 'LOGIN',
     userId,
     userType,
-    name,
+    first,
   };
 }
 
 // Dispatch register action, will call appropriate reducer (authReducer.js)
-export function register(userId, userType, name) {
+export function register(userId, userType, first) {
   return {
     type: 'REGISTER',
     userId,
     userType,
-    name,
+    first,
   };
 }
 

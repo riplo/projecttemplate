@@ -38,6 +38,7 @@ Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_AP
 - [X] Get rid of location
 - [ ] Split up first and last name
 - [ ] Don't make userId public (never pass to frontend). Potentially assign every user a public userId instead. Make checks to ensure people are accessing their own info (pass redux id to backend, compare with mongo id in a helper method)
+- [ ] Change handleChangeFullName redux to be split into first and second
 
 # Next iteration of template
 - [ ] Effective AWS S3

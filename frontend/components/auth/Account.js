@@ -27,7 +27,8 @@ class Account extends Component {
 
     // Set the initial state
     this.state = {
-      name: '',
+      first: '',
+      last: '',
       prevName: '',
       email: '',
       type: '',
@@ -42,9 +43,9 @@ class Account extends Component {
 
     // Bind this to helper methods
     this.handleChangeBio = this.handleChangeBio.bind(this);
-    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+    this.handleChangeLastName = this.handleChangeLastName.bind(this);
     this.handleVerifyEmail = this.handleVerifyEmail.bind(this);
-    this.onDrop = this.onDrop.bind(this);
     this.handleSaveChanges = this.handleSaveChanges.bind(this);
   }
 
@@ -62,7 +63,8 @@ class Account extends Component {
       if (resp.data.success) {
         // Update the state
         this.setState({
-          name: resp.data.data.name,
+          first: resp.data.data.first,
+          last: resp.data.data.last,
           email: resp.data.data.username,
           type: resp.data.data.userType,
           accountVerified: resp.data.data.accountVerified,
@@ -124,13 +126,19 @@ class Account extends Component {
   /**
    * Handle a change to the name state
    */
-  handleChangeName(event) {
+  handleChangeFirstName(event) {
     this.setState({
-      name: event.target.value,
+      first: event.target.value,
       hasChanged: true,
     });
   }
 
+  handleChangeLastName(event) {
+    this.setState({
+      last: event.target.value,
+      hasChanged: true,
+    });
+  }
   /**
    * Handle a change to the bio state
    */
@@ -193,7 +201,7 @@ class Account extends Component {
     return (
       <form className="account" onSubmit={this.handleSaveChanges}>
         <label className="bold">
-          Name
+          First Name
         </label>
         <input
           className="form-control border marg-bot-1"
@@ -201,7 +209,19 @@ class Account extends Component {
           ref={(input) => { this.nameInput = input; }}
           value={ this.state.name }
           placeholder="Enter your name here"
-          onChange={ this.handleChangeName }
+          onChange={ this.handleChangeFirstName }
+        />
+
+        <label className="bold">
+          Last Name
+        </label>
+        <input
+          className="form-control border marg-bot-1"
+          id="name"
+          ref={(input) => { this.nameInput = input; }}
+          value={ this.state.name }
+          placeholder="Enter your name here"
+          onChange={ this.handleChangeLastName }
         />
 
         <label className="bold">

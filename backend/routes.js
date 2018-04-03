@@ -55,7 +55,8 @@ module.exports = () => {
           // If user uses facebook or google login
           if (user.facebookId || user.googleId) {
             const userToLogIn = {
-              name: user.name,
+              first: user.first,
+              last: user.last,
               userType: user.userType,
               userId: user._id,
             };

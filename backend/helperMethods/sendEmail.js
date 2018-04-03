@@ -24,8 +24,7 @@ const sendWelcomeEmail = (user, cb) => {
     // If registration is successful, send an email welcoming to Riplo.
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     // Email addresses them by first name
-    const displayName = user.name.split(' ').length > 1 ? user.name.split(' ')[0] : user.name;
-
+    const displayName = user.first;
     // Set up the html
     const html = (
       `<div style=\"background:#efefef;background-color:#efefef;width:100%;padding:0px,16px,32px,16px;\"` +

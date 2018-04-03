@@ -39,8 +39,7 @@ module.exports = () => {
             });
           } else {
             // Email addresses them by first name
-            const displayName = user.name.split(' ').length > 1 ? user.name.split(' ')[0] : user.name;
-
+            const displayName = user.first;
             // Set up the html
             const html = (
               `<div style=\"background:#efefef;background-color:#efefef;width:100%;padding:0px,16px,32px,16px;\"` +

@@ -15,20 +15,20 @@ const {sendWelcomeEmail} = require('../helperMethods/sendEmail');
 module.exports = () => {
   router.post('/register', (req, res) => {
     // Error checking
-    if (!req.body.name) {
+    if (!req.body.first) {
       res.send({
         success: false,
-        error: 'Name field must be populated.',
+        error: 'First name field must be populated.',
+      });
+    } else if (!req.body.last) {
+      res.send({
+        success: false,
+        error: 'Last name field must be populated.',
       });
     } else if (!req.body.username) {
       res.send({
         success: false,
         error: 'Email field must be populated.',
-      });
-    } else if (!req.body.name.indexOf(" ")) {
-      res.send({
-        success: false,
-        error: 'Enter full name.',
       });
     } else {
       // Ensure password meets validity conditions
@@ -54,7 +54,8 @@ module.exports = () => {
   				  });
           } else {
             const newUser = new User({
-              name: req.body.name,
+              first: req.body.first,
+              last: req.body.last,
               username: req.body.username,
               password: createHash(req.body.password),
               userType: 'user',

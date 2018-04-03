@@ -29,18 +29,18 @@ module.exports = () => {
         });
       } else {
         // Isolate variables from the request
-        const { name } = req.body;
+        const { first, last } = req.body;
 
         // Error checking
-        if (!name) {
+        if (!first) {
           res.send({
             success: false,
-            error: "Name must be populated.",
+            error: "First nmame must be populated.",
           });
-        } else if (!name.indexOf(" ")) {
+        } else if (!last) {
           res.send({
             success: false,
-            error: "Name must contain at least 1 space.",
+            error: "Last name must be populated.",
           });
         } else {
           // The name is properly formatted
@@ -60,7 +60,8 @@ module.exports = () => {
               });
             } else {
               // Update user with new name
-              user.name = name;
+              user.first = first;
+              user.last = last;
               // Save in Mongo
               user.save(userErr => {
                 // Error saving user
