@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import autosize from 'autosize';
-import Dropzone from 'react-dropzone';
 
 // Import actions
 import {changeFullName} from '../../actions/index.js';

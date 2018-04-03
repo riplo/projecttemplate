@@ -24,18 +24,24 @@ Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_AP
 - [ ] Change curator and admin names to be only users and admins:`RequireAdmin.js`, `RequireLogin.js`, `RequireCurator.js`, `authChecking.js`
 - [ ] Make generic account page `Account.js`
 - [ ] Make generic admin page
-- [ ] Make `InfoMessage.js` generic shared component
-- [ ] Uninstall unused packages
-- [ ] Update read me with instructions on setting up mongo, fb oauth, google oauth, sendgrid, AWS, etc.
+- [X] Make `InfoMessage.js` generic shared component
+- [X] Uninstall unused packages
+- [X] Update read me with instructions on setting up mongo, fb oauth, google oauth, sendgrid, AWS, etc.
 - [ ] `forgot.js`, `verify.js`, `register.js` email sent should be in helperMethods
-- [ ] move all AWS stuff to helperMethods
 - [ ] fix fb array passing issue in `init.js`
 - [X] Get rid of location
-- [ ] Image upload stuff in its own component
-- [ ] Size restrictions and type checking on images
+- [X] Image upload stuff in its own component
+- [X] Size restrictions and type checking on images
 - [ ] Change `contact.js` to be `email.js` and include all instances of sending email, get rid of `sendEmail.js` most likely.
 - [ ] Clean up excess CSS
 - [ ] Delete user account functionality
 - [X] Get rid of AWS stuff
 - [X] Get rid of location
 - [ ] Split up first and last name
+
+# Next iteration of template
+- [ ] Effective AWS S3
+  - [ ] Image upload in its own component
+  - [ ] Deleting images after content deletion
+  - [ ] Storing multiple sizes
+  - [ ] Delete user acount functionality
