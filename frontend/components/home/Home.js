@@ -26,7 +26,6 @@ class Home extends React.Component {
 
   /**
    * Load data once the component mounts
-   * Pulls articles, listings, and videos simulatneously
    */
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -37,7 +36,6 @@ class Home extends React.Component {
         : window.location.hash = '';
     }
 
-    // Pull all articles, listings, and videos from the database
     axios.get('/api/home/')
       .then(resp => {
         if (resp.data.success) {

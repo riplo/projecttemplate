@@ -13,7 +13,7 @@ import Loading from '../shared/Loading';
 import {notifyMessage} from '../../actions/notification';
 
 /**
- * Component for Admin only, allows them to add and remove other admins and content curators
+ * Component for Admin only
  */
 class Admin extends Component {
 

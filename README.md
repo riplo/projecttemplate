@@ -21,14 +21,13 @@ Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_AP
 - [ ] Convert to simple nav bar (no sidebar)
 - [ ] Change all components to have only one handleChange, get rid of individual handle change xxx methods
 - [X] Redo AWS with better style
-- [ ] Change curator and admin names to be only users and admins:`RequireAdmin.js`, `RequireLogin.js`, `RequireCurator.js`, `authChecking.js`
+- [X] Change curator and admin names to be only users and admins:`RequireAdmin.js`, `RequireLogin.js`, `RequireCurator.js`, `authChecking.js`
 - [ ] Make generic account page `Account.js`
 - [ ] Make generic admin page
 - [X] Make `InfoMessage.js` generic shared component
 - [X] Uninstall unused packages
 - [X] Update read me with instructions on setting up mongo, fb oauth, google oauth, sendgrid, AWS, etc.
 - [ ] `forgot.js`, `verify.js`, `register.js` email sent should be in helperMethods
-- [ ] fix fb array passing issue in `init.js`
 - [X] Get rid of location
 - [X] Image upload stuff in its own component
 - [X] Size restrictions and type checking on images
@@ -38,6 +37,7 @@ Note: `env.sh` file must contain: `MONGODB_URI`, `FACEBOOK_APP_ID`, `FACEBOOK_AP
 - [X] Get rid of AWS stuff
 - [X] Get rid of location
 - [ ] Split up first and last name
+- [ ] Don't make userId public (never pass to frontend). Potentially assign every user a public userId instead. Make checks to ensure people are accessing their own info (pass redux id to backend, compare with mongo id in a helper method)
 
 # Next iteration of template
 - [ ] Effective AWS S3

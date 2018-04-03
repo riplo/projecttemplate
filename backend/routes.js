@@ -91,13 +91,6 @@ module.exports = () => {
           success: false,
           error: authRes.error,
         });
-      // Check to make sure user is accessing their own data
-      // TODO Will need to change once we don't pass userId from frontend
-      } else if (req.session.passport.user !== req.query.userId) {
-        res.send({
-          success: false,
-          error: 'You may only access your own information.'
-        });
       } else {
           // Find user in Mongo
         User.findById(req.session.passport.user, (err, user) => {

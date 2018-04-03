@@ -56,9 +56,7 @@ class Account extends Component {
     window.scrollTo(0, 0);
 
     // Pull the user's account data
-    axios.get('/api/account', {
-      params: {userId: this.props.userId}
-    })
+    axios.get('/api/account')
     .then(resp => {
       // If successful, will set state with user's information
       if (resp.data.success) {
@@ -293,10 +291,9 @@ Account.propTypes = {
   changeName: PropTypes.func,
 };
 
-// Allows us to access redux state as this.props.userId inside component
-const mapStateToProps = ({authState}) => {
+// Allows us to access redux state inside component
+const mapStateToProps = ({}) => {
   return {
-    userId: authState.userId,
   };
 };
 

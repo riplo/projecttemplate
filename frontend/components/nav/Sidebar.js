@@ -112,32 +112,15 @@ class Sidebar extends Component {
                   <Link onClick={this.toggleMenu} to="/" className="link">
                     Home
                   </Link>
-                  <Link onClick={this.toggleMenu} to="/articles" className="link">
-                    Articles
-                  </Link>
-                  <Link onClick={this.toggleMenu} to="/listings" className="link">
-                    Listings
-                  </Link>
-                  <Link onClick={this.toggleMenu} to="/videos" className="link">
-                    Videos
-                  </Link>
                   <Link onClick={this.toggleMenu} to="/account" className="link line-above">
                     Edit account
                   </Link>
 
                   {/* Link to the user's profile page */}
                   {
-                    (this.props.userType === 'admin' || this.props.userType === 'curator') && (
+                    (this.props.userType === 'admin') && (
                       <Link onClick={this.toggleMenu} to={`/users/${this.props.userId}`} className="link">
                         Profile
-                      </Link>
-                    )
-                  }
-                  { /* Render create link only if admin or curator */ }
-                  {
-                    (this.props.userType === 'admin' || this.props.userType === 'curator') && (
-                      <Link onClick={this.toggleMenu} to="/articles/new" className="link">
-                        Create
                       </Link>
                     )
                   }
@@ -160,15 +143,6 @@ class Sidebar extends Component {
                   {/* If the user is not logged in */}
                   <Link onClick={this.toggleMenu} to="/" className="link">
                     Home
-                  </Link>
-                  <Link onClick={this.toggleMenu} to="/articles" className="link">
-                    Articles
-                  </Link>
-                  <Link onClick={this.toggleMenu} to="/listings" className="link">
-                    Listings
-                  </Link>
-                  <Link onClick={this.toggleMenu} to="/videos" className="link">
-                    Videos
                   </Link>
                   <Link onClick={this.toggleMenu} to="/about" className="link">
                     About

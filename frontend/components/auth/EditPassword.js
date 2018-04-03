@@ -125,7 +125,6 @@ class EditPassword extends Component {
       oldPassword: this.state.oldPassword,
       newPassword: this.state.newPassword,
       newPasswordConfirm: this.state.newPasswordConfirm,
-      userId: this.props.userId,
     };
 
     // Send the request

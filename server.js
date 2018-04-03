@@ -32,13 +32,9 @@ const reset = require('./backend/passport/reset');
 const verify = require('./backend/passport/verify');
 
 // Import other routes
-const articles = require('./backend/routes/articles')();
-const listings = require('./backend/routes/listings')();
-const videos = require('./backend/routes/videos')();
 const users = require('./backend/routes/users')();
 const admin = require('./backend/routes/admin')();
 const contact = require('./backend/routes/contact')();
-const reviews = require('./backend/routes/reviews')();
 const home = require('./backend/routes/home')();
 
 // Pull all env variables are present
@@ -122,23 +118,16 @@ passport.use('local', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
 }, (username, password, done) => {
-  // Find the user with the given username
   User.findOne({ username: username }, (err, user) =>{
-    // If there's an error, finish trying to authenticate (auth failed)
-    if (err) {
-      return done(err);
-    }
-
+    if (err) return done(err);
     // If no user is present, authentication failed
     if (!user) {
       return done(null, false, { message: 'Incorrect email.' });
     }
-
     // If passwords do not match, auth failed
     if (!isValidPassword(user, password)) {
       return done(null, false, { message: 'Incorrect password.' });
     }
-
     // Authentication is successful
     return done(null, user);
   });
@@ -155,53 +144,46 @@ passport.use(
     // profileFields: ['id', 'name', 'username', 'displayName', 'photos', 'email'],
   },
   (accessToken, refreshToken, profile, cb) => {
-    // If profile is found, search mongo for him
-    process.nextTick(() => {
-      User.findOne({username: profile._json.email}, (err, user) => {
-        if (err) {
-          cb(err, null);
-          // If no user, create him in Mongo
-        } else if (!user) {
-          // Create a new user
-          // TODO location
-          const newUser = new User({
-            name: profile.displayName,
-            username: profile._json.email,
-            userType: 'user',
-            facebookId: profile.id,
-          });
-          // Send new user a welcome email
-          sendWelcomeEmail(newUser, (resp) => {
-            if (!resp.success) {
-              cb(resp.error, null);
-            }
-            // Update new user
-            newUser.accountVerified = false;
-            newUser.verificationToken = resp.token;
-            // Save new user in mongo
-            newUser.save((errSave) => {
-              if (errSave) {
-                cb(errSave, null);
-              } else {
-                // If successful return profile
-                cb(null, newUser);
-              }
-            });
-          });
-        } else {
-          // Add facebook id to profile
-          user.facebookId = profile.id;
-          // Save changes
-          user.save((errSave) => {
+    User.findOne({username: profile._json.email}, (err, user) => {
+      if (err) {
+        cb(err, null);
+        // If no user, create him in Mongo
+      } else if (!user) {
+        // Create a new user
+        const newUser = new User({
+          name: profile.displayName,
+          username: profile._json.email,
+          userType: 'user',
+          facebookId: profile.id,
+        });
+        // Send new user a welcome email
+        sendWelcomeEmail(newUser, (resp) => {
+          if (!resp.success) {
+            cb(resp.error, null);
+          }
+          // Update new user
+          newUser.accountVerified = false;
+          newUser.verificationToken = resp.token;
+          // Save new user in mongo
+          newUser.save((errSave) => {
             if (errSave) {
               cb(errSave, null);
             } else {
-              // User already exists
-              cb(null, user);
+              cb(null, newUser);
             }
           });
-        }
-      });
+        });
+      } else {
+        // Add facebook id to exising profile
+        user.facebookId = profile.id;
+        user.save((errSave) => {
+          if (errSave) {
+            cb(errSave, null);
+          } else {
+            cb(null, user);
+          }
+        });
+      }
     });
   }
 ));
@@ -212,55 +194,47 @@ passport.use(new GoogleStrategy({
   clientSecret: GOOGLE_APP_SECRET,
   callbackURL: GOOGLE_APP_CALLBACK,
 }, (accessToken, refreshToken, profile, cb) => {
-  process.nextTick(() => {
-    User.findOne({username: profile.emails[0].value}, (err, user) => {
-      if (err) {
-        cb(err, null);
-        // If no user, create him in Mongo
-      } else if (!user) {
-        // Create a new user
-        // TODO location
-        const newUser = new User({
-          name: profile.displayName,
-          username: profile.emails[0].value,
-          userType: 'user',
-          googleId: profile.id,
-        });
-
-        // Send new user a welcome email
-        sendWelcomeEmail(newUser, (resp) => {
-          if (!resp.success) {
-            cb(resp.error, null);
-          } else {
-            // Update new user
-            newUser.accountVerified = false;
-            newUser.verificationToken = resp.token;
-
-            // Save new user in mongo
-            newUser.save((errSave) => {
-              if (errSave) {
-                cb(errSave, null);
-              } else {
-                // If successful return profile
-                cb(null, newUser);
-              }
-            });
-          }
-        });
-      } else {
-        // Update existing user
-        user.googleId = profile.id;
-        // Save changes in Mongo
-        user.save((errSave) => {
-          if (errSave) {
-            cb(errSave, null);
-          } else {
-            // User already exists
-            cb(null, user);
-          }
-        });
-      }
-    });
+  User.findOne({username: profile.emails[0].value}, (err, user) => {
+    if (err) {
+      cb(err, null);
+      // If no user, create him in Mongo
+    } else if (!user) {
+      // Create a new user
+      const newUser = new User({
+        name: profile.displayName,
+        username: profile.emails[0].value,
+        userType: 'user',
+        googleId: profile.id,
+      });
+      // Send new user a welcome email
+      sendWelcomeEmail(newUser, (resp) => {
+        if (!resp.success) {
+          cb(resp.error, null);
+        } else {
+          // Update new user
+          newUser.accountVerified = false;
+          newUser.verificationToken = resp.token;
+          // Save new user in mongo
+          newUser.save((errSave) => {
+            if (errSave) {
+              cb(errSave, null);
+            } else {
+              cb(null, newUser);
+            }
+          });
+        }
+      });
+    } else {
+      // Update existing user
+      user.googleId = profile.id;
+      user.save((errSave) => {
+        if (errSave) {
+          cb(errSave, null);
+        } else {
+          cb(null, user);
+        }
+      });
+    }
   });
 }));
 
@@ -282,13 +256,9 @@ app.use('/api/', verify(passport));
 
 // Routing backend middleware for other routes
 app.use('/api/', routes);
-app.use('/api/articles/', articles);
-app.use('/api/listings/', listings);
-app.use('/api/videos/', videos);
 app.use('/api/users/', users);
 app.use('/api/', admin);
 app.use('/api/contact/', contact);
-app.use('/api/reviews/', reviews);
 app.use('/api/home/', home);
 
 app.get('*', (request, response) => {

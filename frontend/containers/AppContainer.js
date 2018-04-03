@@ -16,7 +16,6 @@ import Notification from '../components/shared/Notification';
 
 // Authorization components
 import Login from '../components/auth/Login';
-import requireCurator from '../components/auth/RequireCurator';
 import requireAdmin from '../components/auth/RequireAdmin';
 import requireLogin from '../components/auth/RequireLogin';
 import Account from '../components/auth/Account';

@@ -5,49 +5,6 @@
 // Import models
 const User = require('../models/user');
 
-// Helper method to check if a user is an admin or a curator
-const CuratorOrAdminCheck = (req, cb) => {
-  // Isolate userId from Backend
-  let userId = "";
-  if (req.session.passport) {
-    userId = req.session.passport.user;
-  }
-
-  // No user is logged in
-  if (!userId) {
-    cb({
-      success: false,
-      error: 'You must be logged in.',
-    });
-    return;
-  }
-
-  // Search for user in Mongo
-  User.findById(userId, (errUser, user) => {
-    // If error finding user
-    if (errUser) {
-      cb({
-        success: false,
-        error: errUser.message,
-      });
-      return;
-    // User isn't admin or curator
-    } else if (user.userType !== 'admin' && user.userType !== 'curator') {
-      cb({
-        success: false,
-        error: 'General users do not have this privilege.',
-      });
-      return;
-    }
-    // Return no error
-    cb({
-      success: true,
-      error: '',
-    });
-    return;
-  });
-};
-
 // Helper method to check if a user is an admin
 const AdminCheck = (req, cb) => {
   let userId = '';
@@ -120,7 +77,6 @@ const UserCheck = (req, cb) => {
 };
 
 module.exports = {
-  CuratorOrAdminCheck,
   AdminCheck,
   UserCheck,
 };
